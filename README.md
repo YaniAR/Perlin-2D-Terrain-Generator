@@ -1,5 +1,5 @@
 # Perlin-2D-Terrain-Generator
-Using perlin-like noise to generate maps.
+Using perlin noise to generate maps.
 
 Sample outputs:
 ![alt text](https://i.imgur.com/WvxlUsL.png)
