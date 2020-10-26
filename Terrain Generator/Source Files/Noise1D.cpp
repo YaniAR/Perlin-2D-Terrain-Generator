@@ -25,10 +25,10 @@ void drawLine(short begin_x, short begin_y, short end_x, short end_y,
 }
 
 // create Noise
-void generateNoise(const int nOctaves, float(&noise)[TOTAL_ELEMENTS], std::vector<float>& terrain,
+void generateNoise(const int nOctaves, float(&noise)[TERRAIN_SIZE], std::vector<float>& terrain,
 	float& scalingBias)
 {
-	for (int i{ 0 }; i < TOTAL_ELEMENTS; i++)
+	for (int i{ 0 }; i < TERRAIN_SIZE; i++)
 	{
 		float Noise = 0.0f;
 		float ScaleAcc = 0.0f;
@@ -56,10 +56,10 @@ void generateNoise(const int nOctaves, float(&noise)[TOTAL_ELEMENTS], std::vecto
 }
 
 // Continuous shifting animation for 1d noise.
-void smoothNoise(float(&noise)[])
+void shiftNoise1D(float(&noise)[])
 {
-	float temp = noise[TOTAL_ELEMENTS - 1];
-	for (int i{ TOTAL_ELEMENTS - 1 }; i > 0; --i)
+	float temp = noise[TERRAIN_SIZE - 1];
+	for (int i{ TERRAIN_SIZE - 1 }; i > 0; --i)
 		noise[i] = noise[i - 1];
 	noise[0] = temp;
 
