@@ -9,6 +9,8 @@
 void generateNoise2d(int& nOctaves, float noise[], std::vector<float>& terrain,
 	float& scalingBias);
 
-void drawNoise2d(float noise[], sf::RenderWindow& window, sf::Texture& texture);
+void bilinearInterpolate(float noise[], sf::RenderWindow& window, sf::Texture& texture);
+
+void drawNoise2d(float noise[], sf::RenderWindow& window, sf::Texture& texture, bool interpolate);
 
 #endif
