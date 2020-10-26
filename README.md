@@ -1,5 +1,4 @@
 # Perlin-2D-Terrain-Generator
-#### Using perlin noise to generate maps.
 
 # Nearest Neighbour Algorithm + Fractal Noise:
 ##### Updated(26/10/2020)
