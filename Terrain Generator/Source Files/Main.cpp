@@ -26,7 +26,7 @@ void shiftTerrain(std::vector<float>& terrain, std::uniform_real_distribution<fl
 
 int main()
 {
-	
+
 
 	float deltaTime{ 0.0 };
 	float timeTaken{ 0.0f };
@@ -39,21 +39,23 @@ int main()
 
 	// Generate Terrain
 	std::uniform_real_distribution<float> random_engine(0, 1);
-	std::vector<float> terrain(PIXEL_WIDTH * PIXEL_HEIGHT);
+	std::vector<float> terrain(TERRAIN_SIZE * TERRAIN_SIZE);
 	generateSeeds(terrain, random_engine);
 
 	sf::Event event{};
-	
+
 	// Timer starts now
 	Timer t;
 
 	// Create noise array
-	float *noise = new float[PIXEL_WIDTH * PIXEL_HEIGHT]{};
-	
-	generateNoise2d(nOctaves, noise, terrain, scalingBias);
-	sf::Texture texture{};
-	texture.create(PIXEL_WIDTH, PIXEL_HEIGHT);
+	float *noise = new float[TERRAIN_SIZE * TERRAIN_SIZE]{};
 
+	generateNoise2d(nOctaves, noise, terrain, scalingBias);
+
+	sf::Texture texture{};
+	texture.create(TERRAIN_SIZE * 2, TERRAIN_SIZE * 2);
+	bool interpolate{ false };
+	
 	std::cout << "//////////\n\n2D TERRAIN GENERATOR\n\n//////////\n" <<
 		"Press the arrow keys to adjust the image\n(UP): Increase Blend.\n(DOWN): Decrease Blend.\n"
 		<< "(LEFT): Scale down.\n(RIGHT): Scale up.\nPRESS Q TO GENERATE A NEW IMAGE\n";
@@ -62,7 +64,7 @@ int main()
 		deltaTime += t.elapsed();
 		t.reset();
 		timeTaken += deltaTime;
-		
+
 		while (TIME_PER_UPDATE <= timeTaken)
 		{
 			timeTaken -= TIME_PER_UPDATE;
@@ -124,6 +126,12 @@ int main()
 
 						break;
 					}
+					case sf::Keyboard::B:
+					{
+						interpolate = !interpolate;
+						drawNoise2d(noise, window, texture, interpolate);
+						break;
+					}
 					case sf::Keyboard::Space: // For 1D
 					{
 						pauseNoise = !pauseNoise;  // Pause/Unpause
@@ -137,34 +145,12 @@ int main()
 
 		if (scalingBias < 0.2f)
 			scalingBias = 0.2f;
-			
-		/**REMOVE COMMENTS FOR 1D/ Transition
-		if (!pauseNoise)
-			smoothNoise(noise);
-		/**/
 
 		window.clear();
 
-		/**REMOVE COMMENTS FOR 1D/
-		for (int a{ 0 }; a < TERRAIN_SIZE - 1; ++a)
-		{
-			drawLine(std::floor(a * (SCREEN_WIDTH / static_cast<float>(TERRAIN_SIZE))),
-				std::floor((1 - terrain[a]) * SCREEN_HEIGHT),
-				std::floor((a + 1) * (SCREEN_WIDTH / static_cast<float>(TERRAIN_SIZE))),
-				std::floor((1 - terrain[a + 1]) * SCREEN_HEIGHT),
-				window, sf::Color::White);
-
-			drawLine(std::floor(a * (SCREEN_WIDTH / static_cast<float>(TERRAIN_SIZE))),
-				std::floor((1 - noise[a]) * SCREEN_HEIGHT),
-				std::floor((a + 1) * (SCREEN_WIDTH / static_cast<float>(TERRAIN_SIZE))),
-				std::floor((1 - noise[a + 1]) * SCREEN_HEIGHT),
-				window, sf::Color::Green);
-		}
-		/**/
-		drawNoise2d(noise, window, texture);
+		drawNoise2d(noise, window, texture, interpolate);
 		window.display();
 
 	}
-
 	delete[] noise;
 }
