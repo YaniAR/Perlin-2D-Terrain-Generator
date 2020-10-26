@@ -6,6 +6,5 @@ Updated(26/10/2020) using nearest neighbour:
 
 
 Sample outputs(25/10/2020):
-![alt text](https://i.imgur.com/WvxlUsL.png)
 ![alt text](https://i.imgur.com/0oHLsml.png)
 ![alt text](https://i.imgur.com/Lus7VCy.png)
