@@ -8,6 +8,6 @@ Use arrow keys to adjust the number of octaves and pitch level to get different 
 ![alt text](https://i.imgur.com/E90CwDB.png)
 
 # Fractal noise / Fractional Brownian Motion
-Sample outputs(25/10/2020):
+#### Sample outputs(25/10/2020):
 ![alt text](https://i.imgur.com/0oHLsml.png)
 ![alt text](https://i.imgur.com/Lus7VCy.png)
