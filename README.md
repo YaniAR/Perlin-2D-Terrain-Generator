@@ -4,7 +4,6 @@
 ##### Updated(26/10/2020)
 Use arrow keys to adjust the number of octaves and pitch level to get different variations and scales. Press Q to generate a new map.
 
-![alt text](https://i.imgur.com/fSeD9iF.png)
 ![alt text](https://i.imgur.com/ksZn4pS.png)
 ![alt text](https://i.imgur.com/E90CwDB.png)
 
